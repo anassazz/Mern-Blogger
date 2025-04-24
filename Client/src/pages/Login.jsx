@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { FaSignInAlt, FaSpinner } from "react-icons/fa";
 import { Button, Input } from "../../components/ui";
-import { login } from "../../services/auth";
+import { login } from "../services/auth";
 
 const schema = yup.object().shape({
   email: yup.string().email("Email invalide").required("Email requis"),
