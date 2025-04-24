@@ -76,7 +76,7 @@ export default function Login() {
             <Input
               id="email"
               label="Adresse email"
-              type="email"
+              type="email"  
               error={errors.email?.message}
               {...register("email")}
             />
