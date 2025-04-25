@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useArticle } from '../hooks/useArticle';
+// import { useArticle } from '../hooks/useArticle';
 import { useArticles } from '../hooks/useArticles';
 import { useAuth } from '../hooks/useAuth';
 import ArticleForm from '../components/ArticleForm';

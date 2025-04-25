@@ -1,12 +1,12 @@
 import { useParams } from 'react-router-dom';
-import { useArticle } from '../hooks/useArticle';
+import { useArticles } from '../hooks/useArticles';
 import { useComments } from '../hooks/useComments';
 import { useAuth } from '../hooks/useAuth';
 import CommentSection from '../components/CommentSection';
 
 const ArticleDetail = () => {
   const { id } = useParams();
-  const { article, loading, error } = useArticle(id);
+  const { article, loading, error } = useArticles(id);
   const { comments, postComment, removeComment } = useComments(id);
   const { user } = useAuth();
 
