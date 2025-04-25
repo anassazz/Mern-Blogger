@@ -1,11 +1,38 @@
 {
-    "users": [],
-    "articles": [],
-    "comments": [],
-    "categories": [
-      {"id": 1, "name": "Technology"},
-      {"id": 2, "name": "Travel"},
-      {"id": 3, "name": "Food"},
-      {"id": 4, "name": "Lifestyle"}
-    ]
-  }
+  "users": [
+    {
+      "id": 1745593639878,
+      "name": "M.r Mohamed Bouzayan",
+      "email": "mohammedbouzi177@gmail.com",
+      "password": "123123",
+      "createdAt": "2025-04-25T15:07:19.878Z"
+    },
+    {
+      "id": 1745593735316,
+      "name": "zakaria maiin",
+      "email": "zakariat@gmail.com",
+      "password": "123123",
+      "createdAt": "2025-04-25T15:08:55.316Z"
+    }
+  ],
+  "articles": [],
+  "comments": [],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Technology"
+    },
+    {
+      "id": "2",
+      "name": "Travel"
+    },
+    {
+      "id": "3",
+      "name": "Food"
+    },
+    {
+      "id": "4",
+      "name": "Lifestyle"
+    }
+  ]
+}

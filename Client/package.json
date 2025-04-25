@@ -4,17 +4,19 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-  "dev": "vite",
-  "server": "json-server --watch db.json --port 3001 --delay 500",
-  "build": "vite build",
-  "preview": "vite preview"
-},
+    "dev": "vite",
+    "server": "json-server --watch db.json --port 3001",
+    "start": "npm run server",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.16",
     "axios": "^1.9.0",
     "formik": "^2.4.6",
+    "lucide-react": "^0.503.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.56.1",
