@@ -4,7 +4,7 @@ const API_URL = '/api/users'; // Utilise le proxy Vite
 
 export const register = async (userData) => {
   try {
-    const response = await axios.post(API_URL, {
+    const response = await axios.post('http://localhost:3001/users', {
       ...userData,
       id: Date.now(), // Génère un ID unique
       createdAt: new Date().toISOString()
