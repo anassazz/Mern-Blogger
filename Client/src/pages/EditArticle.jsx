@@ -22,7 +22,7 @@ const EditArticle = () => {
   const handleSubmit = async (values) => {
     try {
       await editArticle(id, values);
-      navigate(/articles/`${id}`);
+      navigate(`/articles/${id}`);
     } catch (error) {
       console.error('Error updating article:', error);
     }
