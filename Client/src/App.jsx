@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
+import Home from './pages/Home';
 import ArticleList from './pages/ArticleList';
 import ArticleDetail from './pages/ArticleDetail';
 import CreateArticle from './pages/CreateArticle';
@@ -13,13 +14,13 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<ArticleList />} />
+          <Route index element={<Home />} />
+          <Route path="articles" element={<ArticleList />} />
           <Route path="articles/:id" element={<ArticleDetail />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           
-          {/* Protected routes */}
-          <Route path="create" element={
+          <Route path="articles/create" element={
             <PrivateRoute>
               <CreateArticle />
             </PrivateRoute>
