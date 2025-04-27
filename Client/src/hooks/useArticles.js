@@ -20,14 +20,12 @@ export const useArticles = () => {
   const fetchArticles = async () => {
     setLoading(true);
     try {
-      const subscription = getArticles().subscribe({
-        next: (data) => setArticles(data),
-        error: (err) => setError(err.message),
-        complete: () => setLoading(false)
-      });
-      return () => subscription.unsubscribe();
+      const data = await getArticles().toPromise();
+      setArticles(Array.isArray(data) ? data : []); // Ensure articles is always an array
     } catch (err) {
       setError(err.message);
+      setArticles([]); // Set empty array on error
+    } finally {
       setLoading(false);
     }
   };
@@ -35,7 +33,7 @@ export const useArticles = () => {
   const addArticle = async (article) => {
     try {
       const newArticle = await createArticle(article).toPromise();
-      setArticles([...articles, newArticle]);
+      setArticles(prev => [...prev, newArticle]);
     } catch (err) {
       setError(err.message);
     }
@@ -44,7 +42,7 @@ export const useArticles = () => {
   const editArticle = async (id, updatedArticle) => {
     try {
       const updated = await updateArticle(id, updatedArticle).toPromise();
-      setArticles(articles.map(article => 
+      setArticles(prev => prev.map(article => 
         article.id === id ? updated : article
       ));
     } catch (err) {
@@ -55,7 +53,7 @@ export const useArticles = () => {
   const removeArticle = async (id) => {
     try {
       await deleteArticle(id).toPromise();
-      setArticles(articles.filter(article => article.id !== id));
+      setArticles(prev => prev.filter(article => article.id !== id));
     } catch (err) {
       setError(err.message);
     }
@@ -64,7 +62,7 @@ export const useArticles = () => {
   const search = async (query) => {
     try {
       const results = await searchArticles(query).toPromise();
-      setArticles(results);
+      setArticles(Array.isArray(results) ? results : []);
     } catch (err) {
       setError(err.message);
     }
@@ -73,7 +71,7 @@ export const useArticles = () => {
   const filterByCategory = async (categoryId) => {
     try {
       const filtered = await filterArticlesByCategory(categoryId).toPromise();
-      setArticles(filtered);
+      setArticles(Array.isArray(filtered) ? filtered : []);
     } catch (err) {
       setError(err.message);
     }

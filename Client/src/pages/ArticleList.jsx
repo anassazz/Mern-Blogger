@@ -2,27 +2,11 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaSearch, FaPlus, FaBookOpen } from 'react-icons/fa';
 import ArticleCard from '../components/ArticleCard';
-import { getArticles } from '../api/articleService';
+import { useArticles } from '../hooks/useArticles';
 import Navbar from '../components/Navbar';
 
 const ArticleList = () => {
-  const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const loadArticles = async () => {
-      try {
-        const data = await getArticles();
-        setArticles(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadArticles();
-  }, []);
+  const { articles, loading, error } = useArticles();
 
   if (loading) {
     return (
@@ -57,7 +41,6 @@ const ArticleList = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <Navbar />
       
       <div className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-8">
@@ -70,7 +53,7 @@ const ArticleList = () => {
           </Link>
         </div>
 
-        {articles.length === 0 ? (
+        {!articles || articles.length === 0 ? (
           <div className="text-center py-12 bg-white rounded-lg shadow">
             <FaBookOpen className="mx-auto text-4xl text-gray-400 mb-4" />
             <h3 className="text-xl font-medium text-gray-700">No articles yet</h3>
