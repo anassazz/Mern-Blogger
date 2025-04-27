@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import { useArticles } from '../hooks/useArticles';
 import { useAuth } from '../hooks/useAuth';
 import ArticleForm from '../components/ArticleForm';
-import Navbar from '../components/Navbar';
 import { FiArrowLeft, FiSave } from 'react-icons/fi';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
@@ -25,7 +24,7 @@ const CreateArticle = () => {
         comments: []
       });
       toast.success('Article créé avec succès!');
-      navigate('/');
+      navigate('/articles');
     } catch (error) {
       console.error('Error creating article:', error);
       toast.error('Erreur lors de la création de l\'article');
@@ -39,13 +38,14 @@ const CreateArticle = () => {
     'Science',
     'Business',
     'Health',
+    'Food',
     'Entertainment',
     'Education'
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <Navbar />
+      
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-6">
