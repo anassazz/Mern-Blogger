@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { FaRegUserCircle, FaTrash, FaPaperPlane } from 'react-icons/fa';
 
 const CommentSection = ({ comments, onAddComment, onDeleteComment, currentUser }) => {
   const validationSchema = Yup.object().shape({
@@ -17,54 +18,68 @@ const CommentSection = ({ comments, onAddComment, onDeleteComment, currentUser }
   };
 
   return (
-    <div className="mt-8">
-      <h3 className="text-lg font-medium text-gray-900 mb-4">Comments</h3>
+    <div className="bg-white rounded-xl shadow-md p-8">
+      <h3 className="text-xl font-bold text-gray-900 mb-6">Comments ({comments.length})</h3>
       
-      <form onSubmit={handleSubmit(onSubmit)} className="mb-6">
-        <div>
-          <label htmlFor="content" className="sr-only">Your comment</label>
-          <textarea
-            id="content"
-            name="content"
-            rows="3"
-            {...register('content')}
-            className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-            placeholder="Write a comment..."
-          ></textarea>
-          {errors.content && (
-            <p className="mt-2 text-sm text-red-600">{errors.content.message}</p>
-          )}
-        </div>
-        <div className="mt-3">
-          <button
-            type="submit"
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Post Comment
-          </button>
-        </div>
-      </form>
-
-      <div className="space-y-4">
-        {comments.map(comment => (
-          <div key={comment.id} className="bg-white p-4 rounded-lg shadow">
-            <div className="flex justify-between">
-              <p className="text-sm font-medium text-gray-900">{comment.author || 'Anonymous'}</p>
-              {currentUser && currentUser.id === comment.userId && (
-                <button 
-                  onClick={() => onDeleteComment(comment.id)}
-                  className="text-red-500 hover:text-red-700 text-sm"
-                >
-                  Delete
-                </button>
-              )}
+      {currentUser && (
+        <form onSubmit={handleSubmit(onSubmit)} className="mb-8">
+          <div className="mb-4">
+            <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-2">
+              Add your comment
+            </label>
+            <div className="relative">
+              <textarea
+                id="content"
+                name="content"
+                rows="4"
+                {...register('content')}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                placeholder="Share your thoughts..."
+              ></textarea>
+              <button
+                type="submit"
+                className="absolute right-3 bottom-3 text-emerald-600 hover:text-emerald-800 transition"
+              >
+                <FaPaperPlane className="text-xl" />
+              </button>
             </div>
-            <p className="mt-1 text-sm text-gray-600">{comment.content}</p>
-            <p className="mt-2 text-xs text-gray-500">
-              {new Date(comment.createdAt).toLocaleString()}
-            </p>
+            {errors.content && (
+              <p className="mt-1 text-sm text-red-600">{errors.content.message}</p>
+            )}
           </div>
-        ))}
+        </form>
+      )}
+
+      <div className="space-y-6">
+        {comments.length === 0 ? (
+          <p className="text-gray-500 text-center py-6">No comments yet. Be the first to comment!</p>
+        ) : (
+          comments.map(comment => (
+            <div key={comment.id} className="border-b border-gray-100 pb-6 last:border-0">
+              <div className="flex justify-between items-start mb-3">
+                <div className="flex items-center space-x-3">
+                  <FaRegUserCircle className="text-2xl text-emerald-500" />
+                  <div>
+                    <p className="font-medium text-gray-900">{comment.author || 'Anonymous'}</p>
+                    <p className="text-xs text-gray-500">
+                      {new Date(comment.createdAt).toLocaleString()}
+                    </p>
+                  </div>
+                </div>
+                {currentUser && currentUser.id === comment.userId && (
+                  <button 
+                    onClick={() => onDeleteComment(comment.id)}
+                    className="text-gray-400 hover:text-red-500 transition"
+                    title="Delete comment"
+                  >
+                    <FaTrash />
+                  </button>
+                )}
+              </div>
+              <p className="text-gray-700 pl-11">{comment.content}</p>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

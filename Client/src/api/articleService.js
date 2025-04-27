@@ -6,11 +6,9 @@ const API_URL = 'http://localhost:3001/articles';
 
 export const getArticles = () => {
   return from(axios.get(API_URL)).pipe(
-    map(response => Array.isArray(response.data) ? response.data : []) // Ensure array response
+    map(response => Array.isArray(response.data) ? response.data : [])
   );
 };
-
-// ... rest of your articleService.js remains the same ...
 
 export const getArticleById = (id) => {
   return from(axios.get(`${API_URL}/${id}`)).pipe(
@@ -47,6 +45,18 @@ export const searchArticles = (query) => {
 
 export const filterArticlesByCategory = (categoryId) => {
   return from(axios.get(`${API_URL}?categoryId=${categoryId}`)).pipe(
+    map(response => response.data)
+  );
+};
+
+export const likeArticle = (id) => {
+  return from(axios.patch(`${API_URL}/${id}/like`)).pipe(
+    map(response => response.data)
+  );
+};
+
+export const bookmarkArticle = (id) => {
+  return from(axios.patch(`${API_URL}/${id}/bookmark`)).pipe(
     map(response => response.data)
   );
 };
