@@ -5,7 +5,9 @@ import {
   updateArticle, 
   deleteArticle,
   searchArticles,
-  filterArticlesByCategory
+  filterArticlesByCategory,
+  likeArticle,
+  bookmarkArticle
 } from '../api/articleService';
 
 export const useArticles = () => {
@@ -21,10 +23,10 @@ export const useArticles = () => {
     setLoading(true);
     try {
       const data = await getArticles().toPromise();
-      setArticles(Array.isArray(data) ? data : []); // Ensure articles is always an array
+      setArticles(Array.isArray(data) ? data : []);
     } catch (err) {
       setError(err.message);
-      setArticles([]); // Set empty array on error
+      setArticles([]);
     } finally {
       setLoading(false);
     }
@@ -34,8 +36,10 @@ export const useArticles = () => {
     try {
       const newArticle = await createArticle(article).toPromise();
       setArticles(prev => [...prev, newArticle]);
+      return newArticle;
     } catch (err) {
       setError(err.message);
+      throw err;
     }
   };
 
@@ -45,8 +49,10 @@ export const useArticles = () => {
       setArticles(prev => prev.map(article => 
         article.id === id ? updated : article
       ));
+      return updated;
     } catch (err) {
       setError(err.message);
+      throw err;
     }
   };
 
@@ -56,6 +62,7 @@ export const useArticles = () => {
       setArticles(prev => prev.filter(article => article.id !== id));
     } catch (err) {
       setError(err.message);
+      throw err;
     }
   };
 
@@ -77,15 +84,43 @@ export const useArticles = () => {
     }
   };
 
+  const like = async (id) => {
+    try {
+      const updated = await likeArticle(id).toPromise();
+      setArticles(prev => prev.map(article => 
+        article.id === id ? updated : article
+      ));
+      return updated;
+    } catch (err) {
+      setError(err.message);
+      throw err;
+    }
+  };
+
+  const bookmark = async (id) => {
+    try {
+      const updated = await bookmarkArticle(id).toPromise();
+      setArticles(prev => prev.map(article => 
+        article.id === id ? updated : article
+      ));
+      return updated;
+    } catch (err) {
+      setError(err.message);
+      throw err;
+    }
+  };
+
   return { 
     articles, 
     loading, 
     error, 
     addArticle, 
     editArticle, 
-    removeArticle, 
+    removeArticle,
     search, 
     filterByCategory,
-    fetchArticles
+    fetchArticles,
+    likeArticle: like,
+    bookmarkArticle: bookmark
   };
 };
