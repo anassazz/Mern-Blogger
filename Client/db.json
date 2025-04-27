@@ -29,7 +29,78 @@
       "createdAt": "2025-04-27T11:19:45.073Z"
     }
   ],
-  "articles": [],
+  "articles": [
+    {
+      "id": "7e3f",
+      "title": "bimo",
+      "content": "qwertyuio",
+      "category": "",
+      "imageUrl": "",
+      "summary": "",
+      "categoryId": "3",
+      "userId": 1745752785073,
+      "author": "qwert",
+      "createdAt": "2025-04-27T11:26:31.388Z",
+      "likes": 0,
+      "comments": []
+    },
+    {
+      "id": "9be2",
+      "title": "banan",
+      "content": "qwertyui qwertyui",
+      "category": "",
+      "imageUrl": "",
+      "summary": "",
+      "categoryId": "3",
+      "userId": 1745752785073,
+      "author": "qwert",
+      "createdAt": "2025-04-27T11:27:31.055Z",
+      "likes": 0,
+      "comments": []
+    },
+    {
+      "id": "3275",
+      "title": "RONALDO",
+      "content": "qwertyu qwerty",
+      "category": "",
+      "imageUrl": "",
+      "summary": "",
+      "categoryId": "5",
+      "userId": 1745752785073,
+      "author": "qwert",
+      "createdAt": "2025-04-27T11:36:23.313Z",
+      "likes": 0,
+      "comments": []
+    },
+    {
+      "id": "4fd9",
+      "title": "qwert",
+      "content": "qwert",
+      "category": "",
+      "imageUrl": "",
+      "summary": "",
+      "categoryId": "1",
+      "userId": 1745751217421,
+      "author": "ayoub ayouuub",
+      "createdAt": "2025-04-27T11:37:54.695Z",
+      "likes": 0,
+      "comments": []
+    },
+    {
+      "id": "4e69",
+      "title": "banan",
+      "content": "qwertyui",
+      "category": "",
+      "imageUrl": "",
+      "summary": "",
+      "categoryId": "3",
+      "userId": 1745751217421,
+      "author": "ayoub ayouuub",
+      "createdAt": "2025-04-27T11:38:38.930Z",
+      "likes": 0,
+      "comments": []
+    }
+  ],
   "comments": [],
   "categories": [
     {
@@ -47,6 +118,10 @@
     {
       "id": "4",
       "name": "Lifestyle"
+    },
+    {
+      "id": "5",
+      "name": "Entertainment"
     }
   ]
 }
